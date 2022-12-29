@@ -1,12 +1,12 @@
-package n1exercici3;
+package n2exercici1;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 
 public class ListingIntoTxt {
     private static File [] filesList;
+    private static File OutFile;
 
     public static void readRoute(File route, String sep) throws IOException {
         SimpleDateFormat Date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -37,7 +37,6 @@ public class ListingIntoTxt {
     public static void SaveIntoNewFile(String data){
         String PathFile = "/Users/marinaroyoterol/GitHub/s105/src/n1exercici3/directories.txt";
         FileWriter fw = null;
-        File OutFile;
         boolean first = false;
 
         try {
@@ -69,5 +68,38 @@ public class ListingIntoTxt {
                 e.printStackTrace();
             }
         }
+    }
+
+    //method to set properties & create .properties file & print content from file
+
+    public static void CreateAndReadPropertiesFile(File dir){
+        Properties properties = new Properties();
+        String PropFile = "/Users/marinaroyoterol/GitHub/s105/src/n2exercici1/prop.properties";
+        InputStream inputStream = null;
+
+        try {
+            //set and store properties into file. Null is empty 'cos we don't want to comment just store the property
+            properties.setProperty("ROUTE", "Route to read directory: " + dir.getPath());
+            properties.store(new FileWriter(PropFile), null);
+            properties.setProperty("TXTfile", "Name of the .txt file: " + OutFile.getName() + ". Path to it: " + OutFile.getPath());
+            properties.store(new FileWriter(PropFile), null);
+
+            //save and create .properties file
+            inputStream = new FileInputStream(PropFile);
+            properties.load(inputStream);
+
+            //add comment to .properties file
+            properties.store(new FileWriter(PropFile), "The parameterized values are:\n");
+
+            System.out.println("\n The prop.properties file contains this parameterized values: \n");
+            System.out.println(properties.getProperty("ROUTE"));
+            System.out.println(properties.getProperty("TXTfile"));
+
+
+            //print properties from file
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
