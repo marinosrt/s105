@@ -41,7 +41,7 @@ public class ListingIntoTxt {
         boolean first = false;
 
         try {
-            OutFile = new File("/Users/marinaroyoterol/GitHub/s105/src/n1exercici3/directories.txt");
+            OutFile = new File("./src/n1exercici3/directories.txt");
 
             if (!OutFile.exists()){
                 OutFile.getParentFile().mkdir();
